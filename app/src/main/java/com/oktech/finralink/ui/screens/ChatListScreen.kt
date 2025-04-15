@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,33 +46,38 @@ import com.oktech.finralink.ui.theme.FinraLinkTheme
 @Composable
 fun ChatListScreen(navController: NavController) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Header()
-        val convs = getDummyConversations()
-        LazyColumn {
-            items(convs) { conv ->
-                ConversationItem(
-                    profilePicture = painterResource(id = conv.profileImageRes),
-                    contactName = conv.contactName,
-                    lastMessage = conv.lastMessage,
-                    sender = conv.sender,
-                    time = conv.time,
-                    unreadCount = conv.unreadCount,
-                    isSeen = conv.isSeen,
-                    isOnline = conv.isOnline,
-                    onConvClick = {
-                        navController.navigate("chat_details/${conv.contactName}")
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        content = { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .background(Color.White),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Header()
+                val convs = getDummyConversations()
+                LazyColumn {
+                    items(convs) { conv ->
+                        ConversationItem(
+                            profilePicture = painterResource(id = conv.profileImageRes),
+                            contactName = conv.contactName,
+                            lastMessage = conv.lastMessage,
+                            sender = conv.sender,
+                            time = conv.time,
+                            unreadCount = conv.unreadCount,
+                            isSeen = conv.isSeen,
+                            isOnline = conv.isOnline,
+                            onConvClick = {
+                                navController.navigate("chat_details/${conv.contactName}")
+                            }
+                        )
                     }
-                )
+                }
             }
         }
-
-    }
+    )
 }
 
 
@@ -81,11 +87,6 @@ fun Header() {
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.White)           // White background
-            .border(
-                width = 1.dp,
-                color = Color.LightGray,
-                shape = RectangleShape          // Bottom border trick coming next
-            )
             .padding(8.dp),
         horizontalArrangement = Arrangement.Center,
     ) {
