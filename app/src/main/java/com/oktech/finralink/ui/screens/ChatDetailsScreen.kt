@@ -158,7 +158,11 @@ fun ConvBody(
     currentUserId: String,
     onSend: (String) -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF8F8F8))
+    ) {
         LazyColumn(
             modifier = Modifier
                 .weight(1f)
@@ -184,7 +188,7 @@ fun MessageBubble(message: Message, isCurrentUser: Boolean) {
         Box(
             modifier = Modifier
                 .background(
-                    if (isCurrentUser) Color(0xFFD0F0C0) else Color(0xFFE0E0E0),
+                    if (isCurrentUser) Color(0xFFEDE5F5) else Color(0xFFFFFFFF),
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(12.dp)
